@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "resetdb": "node ./db/reset_db.js"
   },
   "repository": {
     "type": "git",
