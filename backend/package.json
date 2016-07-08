@@ -13,7 +13,9 @@
   "license": "ISC",
   "homepage": "https://github.com/jvikstedt/jnotes#readme",
   "dependencies": {
-    "koa": "^1.2.0"
+    "co": "^4.6.0",
+    "koa": "^1.2.0",
+    "pg": "^6.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.9.2"
