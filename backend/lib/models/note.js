@@ -1,11 +1,12 @@
 'use strict';
 
-const rules = {
-  title: 'required'
-};
-
 var database = require('../database');
 var Checkit = require('checkit');
+
+var rules = new Checkit({
+  title: 'required'
+});
+
 
 var Note = database.Model.extend({
   tableName: 'notes',
@@ -14,7 +15,10 @@ var Note = database.Model.extend({
     this.on('saving', this.validateSave);
   },
   validateSave: function() {
-    return new Checkit(rules).run(this.attributes);
+    return rules.validate(this.attributes);
+  },
+  validate: function() {
+    return rules.validateSync(this.attributes);
   }
 });
 
