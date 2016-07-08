@@ -2,14 +2,12 @@
 
 var koa = require('koa');
 var app = koa();
-
-var pool = require('./database.js');
+var Note = require('./lib/models/note');
 
 app.use(function *(){
+  var note = yield Note.where({id: 1}).fetch();
+  console.log(note.get('title'));
   this.body = 'Hello World';
-
-  var result = yield pool.query('select NOW()');
-  console.log(result.rows[0].now);
 });
 
 app.listen(3000);

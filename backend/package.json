@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon server.js",
-    "resetdb": "node ./db/reset_db.js"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -14,9 +13,10 @@
   "license": "ISC",
   "homepage": "https://github.com/jvikstedt/jnotes#readme",
   "dependencies": {
+    "bookshelf": "^0.10.0",
     "co": "^4.6.0",
-    "koa": "^1.2.0",
-    "pg": "^6.0.1"
+    "knex": "^0.11.7",
+    "koa": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.9.2"
