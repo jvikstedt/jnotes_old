@@ -1,13 +1,8 @@
 'use strict';
 
-var koa = require('koa');
-var app = koa();
-var Note = require('./lib/models/note');
+var app = require('./lib/app');
+var port = process.env.PORT || 3000;
 
-app.use(function *(){
-  var note = yield Note.where({id: 1}).fetch();
-  console.log(note.get('title'));
-  this.body = 'Hello World';
+app.listen(port, function () {
+  console.log('App listening on port: ' + port);
 });
-
-app.listen(3000);
