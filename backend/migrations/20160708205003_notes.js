@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('notes', function (table) {
       table.increments('id').primary();
       table.string('title');
+      table.timestamps();
     })
   ]);
 };
