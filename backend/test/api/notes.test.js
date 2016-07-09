@@ -14,4 +14,20 @@ describe('app', function() {
       assert.equal(notes[0].title, 'test');
     });
   });
+
+  context('POST /notes', function() {
+    it('should create with valid attributes', function *() {
+      var res = yield request.post('/api/v1/notes')
+                  .expect(201)
+                  .send({title: 'test'})
+                  .end();
+    });
+
+    it('should not create with invalid attributes', function *() {
+      var res = yield request.post('/api/v1/notes')
+                  .expect(404)
+                  .send({})
+                  .end();
+    });
+  });
 });
