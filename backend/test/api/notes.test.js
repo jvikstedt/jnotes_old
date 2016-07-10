@@ -35,7 +35,7 @@ describe('app', function() {
 
     it('should not create with invalid attributes', function *() {
       yield request.post('/api/v1/notes')
-        .expect(404)
+        .expect(422)
         .send(NoteFactory.attributes({title: null}))
         .end();
     });
@@ -55,7 +55,41 @@ describe('app', function() {
     });
 
     it('should return 404 if record not found', function*() {
-      yield request.delete(`/api/v1/notes/999`)
+      yield request.delete('/api/v1/notes/999')
+        .expect(404)
+        .end();
+    });
+  });
+
+
+  context('PATCH /notes/:id', function() {
+    before(function *() {
+      yield database.clean();
+    });
+
+    it('should update record when valid id', function*() {
+      var note = yield NoteFactory.build().save();
+      yield request.patch(`/api/v1/notes/${note.id}`)
+        .expect(200)
+        .send(NoteFactory.attributes({title: 'new_value'}))
+        .end();
+      yield note.refresh();
+      assert.equal(note.get('title'), 'new_value');
+    });
+
+
+    it('should not update record if invalid value', function*() {
+      var note = yield NoteFactory.build({title: 'Something1'}).save();
+      yield request.patch(`/api/v1/notes/${note.id}`)
+        .expect(422)
+        .send(NoteFactory.attributes({title: null}))
+        .end();
+      yield note.refresh();
+      assert.equal(note.get('title'), 'Something1');
+    });
+
+    it('should return 404 if record not found', function*() {
+      yield request.patch('/api/v1/notes/999')
         .expect(404)
         .end();
     });
