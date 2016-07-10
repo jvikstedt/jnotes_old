@@ -2,7 +2,6 @@
 
 require('co-mocha');
 var assert = require('assert');
-var Note = require('../../lib/models/note');
 var NoteFactory = require('../factories/note');
 
 describe('Note', function() {
@@ -12,7 +11,7 @@ describe('Note', function() {
   });
 
   it('is invalid without a title', function *() {
-    var errors = new Note({}).validate()[0];
+    var errors = NoteFactory.build({title: null}).validate()[0];
     assert.equal(errors.get('title').message, 'The title is required');
   });
 });

@@ -4,6 +4,7 @@ require('co-mocha');
 var app = require('../../lib/app');
 var assert = require('assert');
 var request = require('co-supertest').agent(app.listen());
+var NoteFactory = require('../factories/note');
 
 describe('app', function() {
   context('GET /notes', function (){
@@ -19,14 +20,14 @@ describe('app', function() {
     it('should create with valid attributes', function *() {
       var res = yield request.post('/api/v1/notes')
                   .expect(201)
-                  .send({title: 'test'})
+                  .send(NoteFactory.attributes())
                   .end();
     });
 
     it('should not create with invalid attributes', function *() {
       var res = yield request.post('/api/v1/notes')
                   .expect(404)
-                  .send({})
+                  .send(NoteFactory.attributes({title: null}))
                   .end();
     });
   });
