@@ -19,6 +19,9 @@ var Note = database.Model.extend({
   },
   validate: function() {
     return rules.validateSync(this.attributes);
+  },
+  isValid: function() {
+    return this.validate()[0] === null;
   }
 });
 
