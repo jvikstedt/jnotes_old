@@ -4,12 +4,15 @@ var koa = require('koa');
 var Router = require('koa-router');
 var bodyParser = require('koa-bodyparser');
 var logger = require('koa-logger');
+var helper = require('../helper');
 
 var notes = require('../controllers/notes');
 
 var app = module.exports = koa();
 
-app.use(logger());
+if (helper.env !== 'test') {
+  app.use(logger());
+}
 app.use(bodyParser());
 
 var router = new Router();

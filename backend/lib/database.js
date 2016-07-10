@@ -1,7 +1,7 @@
 'use strict';
 
-var env = process.env.ENV_VARIABLE || 'development';
+var helper = require('./helper');
 var config = require('../knexfile');
-var knex = require('knex')(config[env]);
+var knex = require('knex')(config[helper.env]);
 
 module.exports = require('bookshelf')(knex);
