@@ -9,6 +9,16 @@ exports.getAll = function *() {
   this.status = 200;
 };
 
+exports.show = function *() {
+  var note = yield Note.where({ id: this.params.id }).fetch();
+  if (note) {
+    this.status = 200;
+    this.body = { results: note };
+  } else {
+    this.status = 404;
+  }
+};
+
 exports.create = function *() {
   var data = helper.pickByKeys(this.request.body, ['title']);
   var note = new Note(data);

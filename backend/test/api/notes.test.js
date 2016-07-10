@@ -25,6 +25,22 @@ describe('app', function() {
     });
   });
 
+  context('GET /notes/:id', function (){
+    before(function *() {
+      yield database.clean();
+    });
+
+    it('Should show invidiual note when valid id', function *() {
+      var note = yield NoteFactory.build({title: 'Something1'}).save();
+      var res = yield request.get(`/api/v1/notes/${note.id}`).expect(200).end();
+      assert.equal(res.body.results.title, 'Something1');
+    });
+
+    it('Should return 404 if record not found', function *() {
+      yield request.get('/api/v1/notes/999').expect(404).end();
+    });
+  });
+
   context('POST /notes', function() {
     it('should create with valid attributes', function *() {
       yield request.post('/api/v1/notes')
