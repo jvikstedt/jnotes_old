@@ -4,7 +4,8 @@ var helper = require('../helper');
 var Note = require('../models/note');
 
 exports.getAll = function *() {
-  this.body = [{id: 1, title: 'test'}];
+  var notes = yield Note.fetchAll();
+  this.body = { results: notes };
   this.status = 200;
 };
 
