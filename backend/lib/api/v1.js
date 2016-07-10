@@ -18,5 +18,6 @@ app.use(bodyParser());
 var router = new Router();
 router.get('/notes', notes.getAll);
 router.post('/notes', notes.create);
+router.delete('/notes/:id', notes.delete);
 
 app.use(router.middleware());

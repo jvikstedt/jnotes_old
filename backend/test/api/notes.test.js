@@ -40,4 +40,24 @@ describe('app', function() {
         .end();
     });
   });
+
+  context('DELETE /notes/:id', function() {
+    before(function *() {
+      yield database.clean();
+    });
+
+    it('should destroy record when valid id', function*() {
+      var note = yield NoteFactory.build().save();
+      yield request.delete(`/api/v1/notes/${note.id}`)
+        .expect(204)
+        .end();
+      assert.equal(yield note.refresh(), null);
+    });
+
+    it('should return 404 if record not found', function*() {
+      yield request.delete(`/api/v1/notes/999`)
+        .expect(404)
+        .end();
+    });
+  });
 });

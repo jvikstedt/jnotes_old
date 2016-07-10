@@ -21,3 +21,13 @@ exports.create = function *() {
     this.body = { errors: e };
   }
 };
+
+exports.delete = function *() {
+  var note = yield Note.where({ id: this.params.id }).fetch();
+  if (note) {
+    yield note.destroy();
+    this.status = 204;
+  } else {
+    this.status = 404;
+  }
+};
