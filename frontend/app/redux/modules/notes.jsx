@@ -7,9 +7,9 @@ const FETCH_NOTES = 'fetch_notes';
 const INITIAL_STATE = { all: [] };
 
 
-export function fetchNotes() {
+export function fetchNotes(search = '') {
   return function(dispatch) {
-    axios.get(`${config.API_URL}/notes`)
+    axios.get(`${config.API_URL}/notes`, { params: { search }})
       .then(response => {
         dispatch({
           type: FETCH_NOTES,

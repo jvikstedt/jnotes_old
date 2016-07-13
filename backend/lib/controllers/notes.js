@@ -4,7 +4,13 @@ var helper = require('../helper');
 var Note = require('../models/note');
 
 exports.getAll = function *() {
-  var notes = yield Note.fetchAll();
+  var search = this.request.query.search || '';
+  var searchWords = search.split(' ');
+  var notes = yield Note.query(function (gb) {
+    searchWords.forEach(function(value) {
+      gb.orWhere('title', 'ILIKE', `%${value}%`);
+    });
+  }).fetchAll();
   this.body = { results: notes };
   this.status = 200;
 };

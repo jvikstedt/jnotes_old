@@ -7,6 +7,10 @@ class Notes extends Component {
     this.props.fetchNotes();
   }
 
+  onSearchChange(event) {
+    this.props.fetchNotes(event.target.value);
+  }
+
   renderNotes() {
     const { notes } = this.props;
     return notes.map((note) => {
@@ -22,6 +26,7 @@ class Notes extends Component {
   render() {
     return (
       <div>
+        <input type='text' onChange={this.onSearchChange.bind(this)}/>
         <table>
           <thead>
             <tr>
