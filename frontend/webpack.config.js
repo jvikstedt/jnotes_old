@@ -1,5 +1,6 @@
 'use strict';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -31,10 +32,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'app', 'index.html'),
       filename: 'index.html'
+    }),
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: true
     })
   ],
   devServer: {
     historyApiFallback: true,
-    contentBase: './'
+    contentBase: './',
+    hot: true,
+    inline: true
   }
 };
