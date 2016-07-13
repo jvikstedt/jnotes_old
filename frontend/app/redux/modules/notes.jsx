@@ -1,14 +1,22 @@
 'use strict';
 
+import axios from 'axios';
+import config from 'config';
+
 const FETCH_NOTES = 'fetch_notes';
 const INITIAL_STATE = { all: [] };
 
+
 export function fetchNotes() {
   return function(dispatch) {
-    dispatch({
-      type: FETCH_NOTES,
-      payload: [{id: 1, title: 'Ruby'}, {id: 2, title: 'Javascript'}]
-    });
+    axios.get(`${config.API_URL}/notes`)
+      .then(response => {
+        dispatch({
+          type: FETCH_NOTES,
+          payload: response.data.results
+        });
+      }).catch(() => {
+      })
   }
 }
 
