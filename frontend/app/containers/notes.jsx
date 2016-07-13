@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchNotes } from '../redux/modules/notes';
+import { reduxForm } from 'redux-form';
+import { fetchNotes, createNote } from '../redux/modules/notes';
 
 class Notes extends Component {
   componentWillMount() {
@@ -9,6 +10,10 @@ class Notes extends Component {
 
   onSearchChange(event) {
     this.props.fetchNotes(event.target.value);
+  }
+
+  handleFormSubmit({ title }) {
+    this.props.createNote({ title });
   }
 
   renderNotes() {
@@ -24,6 +29,7 @@ class Notes extends Component {
   }
 
   render() {
+    const { handleSubmit, fields: { title } } = this.props;
     return (
       <div>
         <input type='text' onChange={this.onSearchChange.bind(this)}/>
@@ -38,13 +44,33 @@ class Notes extends Component {
             {this.renderNotes()}
           </tbody>
         </table>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+
+          <label htmlFor="title">Title</label>
+          <input {...title} id="title"/>
+          {title.touched && title.error && title.error}
+          <button action="submit">Submit</button>
+        </form>
       </div>
     );
   }
+}
+
+function validate(formProps, props) {
+  const errors = {}
+  if (!formProps.title) {
+    errors.title = 'Title can\'t be blank';
+  }
+
+  return errors;
 }
 
 function mapStateToProps(state) {
   return { notes: state.notes.all };
 }
 
-export default connect(mapStateToProps, { fetchNotes: fetchNotes })(Notes)
+export default reduxForm({
+  form: 'createNote',
+  fields: ['title'],
+  validate
+}, mapStateToProps, { fetchNotes: fetchNotes, createNote: createNote })(Notes)
