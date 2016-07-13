@@ -22,7 +22,10 @@ module.exports = {
     }]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      config: path.join(__dirname, 'config', 'dev')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
