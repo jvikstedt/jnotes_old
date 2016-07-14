@@ -3,6 +3,8 @@
 var helper = require('../helper');
 var Note = require('../models/note');
 
+const allowedParams = ['title'];
+
 exports.getAll = function *() {
   var search = this.request.query.search || '';
   var searchWords = search.split(' ');
@@ -26,7 +28,7 @@ exports.show = function *() {
 };
 
 exports.create = function *() {
-  var data = helper.pickByKeys(this.request.body, ['title']);
+  var data = helper.pickByKeys(this.request.body, allowedParams);
   var note = new Note(data);
   try {
     yield note.save();
@@ -52,7 +54,7 @@ exports.delete = function *() {
 exports.update = function *() {
   var note = yield Note.where({ id: this.params.id }).fetch();
   if (note) {
-    var data = helper.pickByKeys(this.request.body, ['title']);
+    var data = helper.pickByKeys(this.request.body, allowedParams);
     note.set(data);
     try {
       yield note.save();
