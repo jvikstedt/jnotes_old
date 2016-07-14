@@ -38,9 +38,9 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'jnotes_production',
-      user:     'jnotes',
-      password: 'jnotes'
+      database: process.env.JNOTES_DB,
+      user:     process.env.JNOTES_DB_USER,
+      password: process.env.JNOTES_DB_PASSWORD
     },
     pool: {
       min: 2,
