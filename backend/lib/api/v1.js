@@ -7,6 +7,7 @@ var logger = require('koa-logger');
 var helper = require('../helper');
 
 var notes = require('../controllers/notes');
+var users = require('../controllers/users');
 
 var app = module.exports = koa();
 
@@ -21,5 +22,7 @@ router.get('/notes/:id', notes.show);
 router.post('/notes', notes.create);
 router.delete('/notes/:id', notes.delete);
 router.patch('/notes/:id', notes.update);
+
+router.post('/signup', users.signup);
 
 app.use(router.middleware());
