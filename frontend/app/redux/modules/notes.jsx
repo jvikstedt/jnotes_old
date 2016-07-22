@@ -13,7 +13,7 @@ export function fetchNotes(search = '') {
       .then(response => {
         dispatch({
           type: FETCH_NOTES,
-          payload: response.data.results
+          payload: response.data
         });
       }).catch(() => { });
   };
@@ -26,7 +26,7 @@ export function createNote(params) {
     }).then(response => {
       dispatch({
         type: CREATE_NOTE,
-        payload: response.data.results
+        payload: response.data
       });
     }).catch(() => {})
   };
