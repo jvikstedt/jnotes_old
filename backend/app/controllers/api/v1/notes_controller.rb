@@ -3,7 +3,7 @@ class Api::V1::NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = Note.all
+    @notes = Note.search(params[:search])
 
     render json: @notes
   end
