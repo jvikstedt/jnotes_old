@@ -1,13 +1,24 @@
-# Jnotes backend
+# README
 
-## Dependencies
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-    postgresql
+Things you may want to cover:
 
-## Setup
+* Ruby version
 
-    npm install
+* System dependencies
 
-## Running on dev
+* Configuration
 
-    npm run dev
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
