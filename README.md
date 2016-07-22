@@ -4,6 +4,5 @@
 
 ### Used technologies
 
-    NodeJS
-    ReactJS
-    PostgreSQL
+    Backend: Rails
+    Frontend: ReactJS
