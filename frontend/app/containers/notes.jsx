@@ -18,18 +18,6 @@ class Notes extends Component {
     this.props.createNote({ title });
   }
 
-  renderNotes() {
-    const { notes } = this.props;
-    return notes.map((note) => {
-      return (
-        <tr key={note.id}>
-          <td>{note.id}</td>
-          <td>{note.title}</td>
-        </tr>
-      );
-    });
-  }
-
   render() {
     const { handleSubmit, fields: { title }, notes } = this.props;
     return (
