@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { fetchNotes, createNote } from '../redux/modules/notes';
-import Search from '../components/search';
-import NotesList from '../components/notes-list';
+import { fetchNotes, createNote } from 'redux/modules/notes';
+import Search from 'components/search';
+import NotesList from 'components/notes-list';
 
 class Notes extends Component {
   componentWillMount() {

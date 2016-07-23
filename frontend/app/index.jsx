@@ -3,11 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import configureStore from './redux/configureStore';
+import configureStore from 'redux/configureStore';
 import { Router, Route, IndexRoute, browserHistory  } from 'react-router';
 
-import App from './components/app';
-import Notes from './containers/notes';
+import App from 'components/app';
+import Notes from 'containers/notes';
 
 const store = configureStore();
 
