@@ -7,7 +7,7 @@ import configureStore from 'redux/configureStore';
 import { Router, Route, IndexRoute, browserHistory  } from 'react-router';
 
 import App from 'components/app';
-import Notes from 'containers/notes';
+import Notes from 'components/notes';
 
 const store = configureStore();
 
