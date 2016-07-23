@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { fetchNotes, createNote } from '../redux/modules/notes';
 import Search from '../components/search';
+import NotesList from '../components/notes-list';
 
 class Notes extends Component {
   componentWillMount() {
@@ -30,21 +31,11 @@ class Notes extends Component {
   }
 
   render() {
-    const { handleSubmit, fields: { title } } = this.props;
+    const { handleSubmit, fields: { title }, notes } = this.props;
     return (
       <div>
         <Search onSearchChange={this.onSearchChange.bind(this)}/>
-        <table>
-          <thead>
-            <tr>
-              <td>ID</td>
-              <td>TITLE</td>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderNotes()}
-          </tbody>
-        </table>
+        <NotesList notes={notes}/>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
           <label htmlFor="title">Title</label>
