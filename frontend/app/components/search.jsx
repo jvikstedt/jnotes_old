@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
 export default class Search extends Component {
+  onSearchChange(e) {
+    this.props.triggerSearch(e.target.value);
+  }
+
   render() {
     return (
-      <input type='text' onChange={this.props.onSearchChange}/>
+      <input type='text' onChange={this.onSearchChange.bind(this)}/>
     );
   }
 }
 
 Search.propTypes = {
-  onSearchChange: React.PropTypes.func.isRequired
+  triggerSearch: React.PropTypes.func.isRequired
 }

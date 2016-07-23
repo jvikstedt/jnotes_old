@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { fetchNotes, createNote } from 'redux/modules/notes';
-import Search from 'components/search';
+import { createNote } from 'redux/modules/notes';
+import NotesSearch from 'containers/notes-search';
 import NotesList from 'components/notes/notes-list';
 
 class Notes extends Component {
-  componentWillMount() {
-    this.props.fetchNotes();
-  }
-
-  onSearchChange(event) {
-    this.props.fetchNotes(event.target.value);
-  }
 
   handleFormSubmit({ title }) {
     this.props.createNote({ title });
@@ -22,7 +15,7 @@ class Notes extends Component {
     const { handleSubmit, fields: { title }, notes } = this.props;
     return (
       <div>
-        <Search onSearchChange={this.onSearchChange.bind(this)}/>
+        <NotesSearch/>
         <NotesList notes={notes}/>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
@@ -53,4 +46,4 @@ export default reduxForm({
   form: 'createNote',
   fields: ['title'],
   validate
-}, mapStateToProps, { fetchNotes: fetchNotes, createNote: createNote })(Notes)
+}, mapStateToProps, { createNote: createNote })(Notes)
