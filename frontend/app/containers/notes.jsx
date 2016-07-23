@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { fetchNotes, createNote } from '../redux/modules/notes';
+import Search from '../components/search';
 
 class Notes extends Component {
   componentWillMount() {
@@ -32,7 +33,7 @@ class Notes extends Component {
     const { handleSubmit, fields: { title } } = this.props;
     return (
       <div>
-        <input type='text' onChange={this.onSearchChange.bind(this)}/>
+        <Search onSearchChange={this.onSearchChange.bind(this)}/>
         <table>
           <thead>
             <tr>
