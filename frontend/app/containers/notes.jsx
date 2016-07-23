@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { createNote } from 'redux/modules/notes';
 import NotesSearch from 'containers/notes-search';
-import NotesList from 'components/notes/notes-list';
+import NotesList from 'containers/notes-list';
 
 class Notes extends Component {
 
@@ -16,7 +16,7 @@ class Notes extends Component {
     return (
       <div>
         <NotesSearch/>
-        <NotesList notes={notes}/>
+        <NotesList/>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
           <label htmlFor="title">Title</label>
@@ -38,12 +38,8 @@ function validate(formProps, props) {
   return errors;
 }
 
-function mapStateToProps(state) {
-  return { notes: state.notes.all };
-}
-
 export default reduxForm({
   form: 'createNote',
   fields: ['title'],
   validate
-}, mapStateToProps, { createNote: createNote })(Notes)
+}, null, { createNote: createNote })(Notes)
