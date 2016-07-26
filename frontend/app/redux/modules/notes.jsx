@@ -9,8 +9,10 @@ const INITIAL_STATE = { all: [], note: {} };
 
 export function fetchNotes(search = '') {
   return function(dispatch) {
-    axios.get(`${config.API_URL}/notes`, { params: { search }})
-      .then(response => {
+    axios.get(`${config.API_URL}/notes`, {
+      params: { search },
+      headers: { authorization: localStorage.getItem('token')}
+    }).then(response => {
         dispatch({
           type: FETCH_NOTES,
           payload: response.data
@@ -21,8 +23,11 @@ export function fetchNotes(search = '') {
 
 export function createNote(params) {
   return function(dispatch) {
-    axios.post(`${config.API_URL}/notes`, {
-      title: params.title
+    axios({
+      method: 'post',
+      url: `${config.API_URL}/notes`,
+      data: { title: params.title },
+      headers: { authorization: localStorage.getItem('token')}
     }).then(response => {
       dispatch({
         type: CREATE_NOTE,
